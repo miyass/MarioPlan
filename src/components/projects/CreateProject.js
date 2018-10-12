@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { createProject } from '../../store/actions/projectActions'
 
 class CreateProject extends Component {
   state = {
@@ -14,7 +16,7 @@ class CreateProject extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.createProject(this.state)
   }
   render() {
     return (
@@ -38,4 +40,15 @@ class CreateProject extends Component {
   }
 }
 
-export default CreateProject
+//Reduxの用意されたメソッド
+//ReduxのDispatchを第一引き数に取る関数
+//propsにaction?を加える
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createProject: (project) => dispatch(createProject(project))
+  }
+}
+
+//action creatorのみの受け渡し
+// https://qiita.com/MegaBlackLabel/items/df868e734d199071b883
+export default connect(null, mapDispatchToProps)(CreateProject)

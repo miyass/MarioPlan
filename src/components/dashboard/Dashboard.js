@@ -25,6 +25,7 @@ class Dashboard extends Component {
   }
 }
 
+//Reduxの用意されたメソッド
 const mapStateToProps = (state) => {
   console.log(state);
   return {
